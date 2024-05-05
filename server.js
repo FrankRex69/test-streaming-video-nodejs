@@ -9,7 +9,8 @@ var app = express();
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 
-app.use('/test1',express.static('public'));
+app.use('/rtmp',express.static('public'));
+app.use('/srt',express.static('public/srt.html'));
 
 const server = require('http').createServer(app);
 
@@ -212,7 +213,9 @@ io.on('error',function(e){
 const port = 1440;
 server.listen(port, function(){  
   //console.log(`https://www.chop.click:${port}/test1`); 
-  console.log(`http://localhost:${port}/test1`); 
+  console.log(`http://localhost:${port}/rtmp`);
+  console.log(`http://localhost:${port}/admin-rtmp`); 
+  console.log(`http://localhost:${port}/srt`); 
 });
 
 process.on('uncaughtException', function(err) {
