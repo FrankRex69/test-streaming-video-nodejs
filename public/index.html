@@ -1,0 +1,89 @@
+<!doctype>
+
+<html>
+<head>
+	 <!-- Required meta tags -->
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <!-- Bootstrap CSS -->
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	
+	<title>Live Stream From the Browser</title>
+	<script src="socket.io.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="icon.ico">
+	<script src="libs/flv.min.js"></script>
+	<script src="jstech/flvplayer.js?v=<?php echo date('YmdHis'); ?>"></script>
+	<script src="jstech/RetroFrontCam.js"></script>
+	
+</head>
+<body onload="listaDispositivi()">
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<input class="form" type="hidden" id="socket.io_address" value="/"/>
+<label class="form" for="option_url">RTMP Destination:</label>
+<h3 class="input-group input-group-lg" for="option_url">RTMP Destination:</h3>
+<input style="width: 90%;" type="text" id="option_url" value="rtmp://localhost:1941/test/a"/>
+<br>
+<input class="form" type="checkbox"  style="display:none" id="checkbox_Reconection" checked="true">
+<label class="form" style="display:none" >Reconnection </label>
+<br>
+<h3>
+Connect the server, then start streaming.  
+</h3>
+
+<br/>
+<hr/>
+
+<table>
+	<tr>
+		<td valign="bottom" style="text-align: center;">
+			<p id="output_message"></p>	
+			<video width="320" height="240" id="output_video" autoplay=true controls="controls" playsinline></video>			
+		</td>
+		<!-- <td valign="bottom" style="text-align: center;">
+			<video width="320" height="240" autoplay id="videoElementPlayer" controls="controls" playsinline></video>			
+		</td> -->
+	</tr>
+	<tr>
+		<td valign="bottom">
+			<button class="btn btn-primary btn-sm" id="button_server">Connect Server</button>
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+			<button class="btn btn-primary btn-sm" id="button_start" onclick="requestMedia('fronte')">Start Stream</button>
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+			<button class="btn btn-primary btn-sm" id="button_start_retrocam" onclick="requestMedia('retro')">Start Stream RetroCam</button>
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">			
+			<button class="btn btn-primary btn-sm" id="button_stop">Stop Streaming</button>					
+		</td>		
+	</tr>
+	<tr>
+		<td valign="bottom">
+			<button class="btn btn-secondary" onclick="funzioneplayer(1,document.getElementById('option_url').value)">Start player TEST 1</button>						
+		</td>
+		<td valign="bottom">				
+			<!-- <svg id="recording" height="50" width="50"> -->
+				<circle id="recordingCircle" cx="25" cy="25" r="20" stroke="black" stroke-width="1" fill="gray" hidden/>
+			<!-- </svg> -->
+		</td>
+		<td></td>		
+	</tr>
+</table>
+
+
+
+<textarea readonly="true" id="output_console" rows=15></textarea>
+
+<script src="jstech/ConnStreamRtmp.js"></script>
+
+</body>
+</html>
